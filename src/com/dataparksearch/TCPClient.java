@@ -1,5 +1,4 @@
 package com.dataparksearch;
-//package com.e2esp.socket.test;
 
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
@@ -42,7 +41,7 @@ public class TCPClient { // implements Runnable {
 		    	 
 		    	 final Random myRandom = new Random();
 		    	 String encquery = URLEncoder.encode(message, "utf-8");
-		    	 out.println("GET q=" + encquery + "&"+ String.valueOf(myRandom.nextInt()) +"&tmplt=json.htm\0");
+		    	 out.println("GET q=" + encquery + "&"+ String.valueOf(myRandom.nextInt()) +"&s=IRPD&tmplt=strings.htm\0");
 		    	 Log.d("TCP", "C: Sent. '" + message + "'   '" + encquery + "'");
 		    	 
 		    	// PrintReader in = new PrintReader( new BufferedReader( new InputStreamReader(socket.getInputStream())),true);
