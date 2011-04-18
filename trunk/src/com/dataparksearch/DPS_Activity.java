@@ -38,7 +38,7 @@ public class DPS_Activity extends Activity {
     LinearLayout browserFrame;
     ProgressBar mProgressBar;
     ImageView mSearchButton;
-    
+    int isClicked = 0; 
     /** Called with the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -140,12 +140,16 @@ public class DPS_Activity extends Activity {
     OnClickListener mSearchListener = new OnClickListener() {
         public void onClick(View v) {
         	
-        	InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-         	imm.hideSoftInputFromWindow(mEditor.getWindowToken(), 0);
-             	
-         	new asyncTaskUpdateProgress().execute();             
-	       
-           // mEditor.setText(responseText);
+        	if(isClicked == 0){
+	        	InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+	         	imm.hideSoftInputFromWindow(mEditor.getWindowToken(), 0);
+	            
+	         	Log.d("View", "button clicked");
+	         	isClicked = 1;
+	         	new asyncTaskUpdateProgress().execute();             
+	         	Log.d("View", "async task executed");
+	           // mEditor.setText(responseText);
+        	}
 
         }
     };
@@ -196,10 +200,10 @@ public class DPS_Activity extends Activity {
     				Log.d("TCP", "C: Done.");
     				//    return Data.getString("query");
     				//rQuery = Data.getString("query");
-//    				rTitle = sResult.getString("title");
-//    				rURL = sResult.getString("url");
-//    				rDate = sResult.getString("date");
-//    				rContent = sResult.getString("content");
+    				//    				rTitle = sResult.getString("title");
+    				//    				rURL = sResult.getString("url");
+    				//    				rDate = sResult.getString("date");
+    				//    				rContent = sResult.getString("content");
 
     				WebView mWebView = new WebView(getApplicationContext());
     				mWebView.setLayoutParams(new LayoutParams(width, LayoutParams.FILL_PARENT));
@@ -207,17 +211,19 @@ public class DPS_Activity extends Activity {
     				//  webView = new MyWebView( getApplicationContext(), Settings.this, AsyncWebConnect.this);
     				// Loads html-string into webview
     				//String dString = "<html><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><body><h3><a href=\""+rURL+"\">"+rTitle+"</a></h3><p>"+rContent+"</p><p>"+rDate+"</p></body></html>";
-    				
-    				mWebView.loadData(/*dString*/ response[i], "text/html", "UTF-8");
+
+    				mWebView.loadData("<html><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><body>" +/*dString*/ response[i] +"</body></html>", "text/html", "UTF-8");
     				browserFrame.addView(mWebView);
     				Log.d("View", "added view: " + (i - 9));
     			}
+
 
     		}// catch (JSONException e) {
 //    			rQuery = ("Problem parsing API response" + e);
 
 //    		}
-	
+    		
+    		isClicked = 0;
 
     	}
 
