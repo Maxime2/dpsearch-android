@@ -4,10 +4,8 @@ package com.dataparksearch;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URLEncoder;
@@ -38,7 +36,6 @@ public class TCPClient { // implements Runnable {
         	 
         	 Log.d("TCP", "C: Connecting...");
         	 Socket socket = new Socket(serverAddr, TCPDesktopServer.SERVERPORT);
-        	// String message = "music";
 		     try {
 		    	 Log.d("TCP", "C: Sending: '" + message + "'");
 		    	 PrintWriter out = new PrintWriter( new BufferedWriter( new OutputStreamWriter(socket.getOutputStream())),true);

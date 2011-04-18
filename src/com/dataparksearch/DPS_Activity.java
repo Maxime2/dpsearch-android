@@ -1,14 +1,12 @@
 package com.dataparksearch;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +15,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
@@ -30,7 +27,6 @@ import org.json.JSONObject;
 
 import com.dataparksearch.TCPClient;
 
-import java.io.BufferedWriter;
 
 public class DPS_Activity extends Activity {
 	
@@ -178,7 +174,8 @@ public class DPS_Activity extends Activity {
     	protected void onPostExecute(Void result) {
     		// TODO Auto-generated method stub
     		//   buttonStart.setClickable(true);
-    		String rQuery= "", rTitle= "", rURL= "", rDate= "", rContent = ""; 
+    		//String rQuery= "";
+    		String rTitle= "", rURL= "", rDate= "", rContent = ""; 
  
 	        mProgressBar.setVisibility(View.GONE);
 	        mSearchButton.setVisibility(View.VISIBLE);
@@ -186,7 +183,7 @@ public class DPS_Activity extends Activity {
 	        WindowManager w = getWindowManager(); 
 	        Display d = w.getDefaultDisplay(); 
 	        int width = d.getWidth(); 
-	        int height = d.getHeight(); 
+	        //int height = d.getHeight(); 
 	        
     		try {
     			// Drill into the JSON response to find the content body
@@ -200,7 +197,7 @@ public class DPS_Activity extends Activity {
     				JSONObject sResult = results.getJSONObject(i);
     				Log.d("TCP", "C: Done.");
     				//    return Data.getString("query");
-    				rQuery = Data.getString("query");
+    				//rQuery = Data.getString("query");
     				rTitle = sResult.getString("title");
     				rURL = sResult.getString("url");
     				rDate = sResult.getString("date");
@@ -218,7 +215,7 @@ public class DPS_Activity extends Activity {
     			}
 
     		} catch (JSONException e) {
-    			rQuery = ("Problem parsing API response" + e);
+//    			rQuery = ("Problem parsing API response" + e);
 
     		}
 	
