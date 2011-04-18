@@ -1,5 +1,4 @@
 package com.dataparksearch;
-//package com.e2esp.socket.test;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

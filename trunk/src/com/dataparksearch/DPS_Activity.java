@@ -21,9 +21,9 @@ import android.widget.LinearLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+//import org.json.JSONArray;
+//import org.json.JSONException;
+//import org.json.JSONObject;
 
 import com.dataparksearch.TCPClient;
 
@@ -155,7 +155,8 @@ public class DPS_Activity extends Activity {
 
     	int progress;
     	String SERP;
-    	JSONObject response;
+    	String[] response;
+    	//JSONObject response;
  //   	JSONObject jsonObject = new JSONObject();
     	
     	@Override
@@ -175,7 +176,7 @@ public class DPS_Activity extends Activity {
     		// TODO Auto-generated method stub
     		//   buttonStart.setClickable(true);
     		//String rQuery= "";
-    		String rTitle= "", rURL= "", rDate= "", rContent = ""; 
+    		//String rTitle= "", rURL= "", rDate= "", rContent = ""; 
  
 	        mProgressBar.setVisibility(View.GONE);
 	        mSearchButton.setVisibility(View.VISIBLE);
@@ -185,39 +186,37 @@ public class DPS_Activity extends Activity {
 	        int width = d.getWidth(); 
 	        //int height = d.getHeight(); 
 	        
-    		try {
+    		/*try*/ {
     			// Drill into the JSON response to find the content body
     			
-    			JSONObject Data = response.getJSONObject("responseData");
-    			JSONArray results = Data.getJSONArray("results");
-    			int len = results.length();
+    			int len = response.length;
     			
-    			for(int i = 0; i < len; ++i) {
+    			for(int i = 9; i < len; ++i) {
 
-    				JSONObject sResult = results.getJSONObject(i);
     				Log.d("TCP", "C: Done.");
     				//    return Data.getString("query");
     				//rQuery = Data.getString("query");
-    				rTitle = sResult.getString("title");
-    				rURL = sResult.getString("url");
-    				rDate = sResult.getString("date");
-    				rContent = sResult.getString("content");
+//    				rTitle = sResult.getString("title");
+//    				rURL = sResult.getString("url");
+//    				rDate = sResult.getString("date");
+//    				rContent = sResult.getString("content");
 
     				WebView mWebView = new WebView(getApplicationContext());
     				mWebView.setLayoutParams(new LayoutParams(width, LayoutParams.FILL_PARENT));
 
     				//  webView = new MyWebView( getApplicationContext(), Settings.this, AsyncWebConnect.this);
     				// Loads html-string into webview
-    				String dString = "<html><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><body><h3><a href=\""+rURL+"\">"+rTitle+"</a></h3><p>"+rContent+"</p><p>"+rDate+"</p></body></html>";
-    				mWebView.loadData(dString, "text/html", "UTF-8");
+    				//String dString = "<html><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><body><h3><a href=\""+rURL+"\">"+rTitle+"</a></h3><p>"+rContent+"</p><p>"+rDate+"</p></body></html>";
+    				
+    				mWebView.loadData(/*dString*/ response[i], "text/html", "UTF-8");
     				browserFrame.addView(mWebView);
-    				Log.d("View", "added view: "+i);
+    				Log.d("View", "added view: " + (i - 9));
     			}
 
-    		} catch (JSONException e) {
+    		}// catch (JSONException e) {
 //    			rQuery = ("Problem parsing API response" + e);
 
-    		}
+//    		}
 	
 
     	}
@@ -242,12 +241,10 @@ public class DPS_Activity extends Activity {
     		cli.hostname = "inet-sochi.ru";
     		SERP = cli.run();
 
-    		try{
-    			response = new JSONObject(SERP);
-    		} catch (JSONException e) {
-    //			rQuery = ("Problem parsing API response" + e);
-
-    		}
+    		String delims = "\n";
+    		
+    		response = SERP.split(delims);
+    		
     		return null;
     	}
 
