@@ -1,0 +1,1 @@
+Native Android interface for accessing DataparkSearch Engine. Integrates with Restful API of [DataparkSearch Engine](http://code.google.com/p/dataparksearch/).
